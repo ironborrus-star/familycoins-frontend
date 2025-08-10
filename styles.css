@@ -1,0 +1,2677 @@
+/* Сброс стилей и базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Общие стили */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #4b5563;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #4f46e5;
+    border: 1px solid #4f46e5;
+}
+
+.btn-outline:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+}
+
+/* Экраны */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Экран авторизации */
+#auth-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.auth-container {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo i {
+    font-size: 3rem;
+    color: #f59e0b;
+    margin-bottom: 0.5rem;
+}
+
+.logo h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.logo p {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Вкладки авторизации */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    background: #f3f4f6;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    background: transparent;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #4f46e5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Формы */
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.25rem;
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+/* Главный экран */
+#main-screen {
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 
+        "nav nav"
+        "sidebar content";
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 250px 1fr;
+}
+
+/* Навигация */
+.navbar {
+    grid-area: nav;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #1f2937;
+}
+
+.nav-brand i {
+    color: #f59e0b;
+    font-size: 1.5rem;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.coin-balance {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fef3c7;
+    color: #d97706;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+.coin-balance i {
+    color: #f59e0b;
+}
+
+/* Боковое меню */
+.sidebar {
+    grid-area: sidebar;
+    background: white;
+    border-right: 1px solid #e5e7eb;
+    padding: 1rem 0;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.menu-item.active {
+    background: #ede9fe;
+    color: #4f46e5;
+    border-right: 3px solid #4f46e5;
+}
+
+.menu-item i {
+    width: 1.25rem;
+    text-align: center;
+}
+
+/* Основное содержимое */
+.content {
+    grid-area: content;
+    background: #f9fafb;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Дашборд */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.dashboard-card:nth-child(1) .card-icon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.dashboard-card:nth-child(2) .card-icon {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.dashboard-card:nth-child(3) .card-icon {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.card-content h3 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.card-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Задания */
+.tasks-tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+}
+
+.tasks-tabs .tab-btn {
+    background: transparent;
+    color: #6b7280;
+}
+
+.tasks-tabs .tab-btn.active {
+    background: #4f46e5;
+    color: white;
+}
+
+.tasks-container {
+    display: grid;
+    gap: 1rem;
+}
+
+.task-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.task-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.task-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.task-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.task-status.pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.task-status.assigned {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.task-status.in_progress {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.task-status.completed {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.task-status.waiting_approval {
+    background: #fce7f3;
+    color: #be185d;
+}
+
+.task-status.approved {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.task-status.rejected {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.task-details {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.task-coins {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #d97706;
+    font-weight: 600;
+}
+
+.task-due {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Магазин */
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.store-item {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.store-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.item-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.item-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.item-price {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #d97706;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.item-description {
+    color: #6b7280;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.item-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #f3f4f6;
+    color: #6b7280;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.item-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.item-actions .btn {
+    flex: 1;
+    justify-content: center;
+}
+
+/* Монеты */
+.coins-info {
+    margin-bottom: 2rem;
+}
+
+.balance-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.balance-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.balance-details {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.balance-item:last-child {
+    border-bottom: none;
+}
+
+.balance-item span:first-child {
+    color: #6b7280;
+}
+
+.balance-item span:last-child {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.transactions-container {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.transactions-container h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.transaction-filters {
+    margin-bottom: 1rem;
+}
+
+.transaction-filters select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background: white;
+}
+
+.transactions-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background: #f9fafb;
+}
+
+.transaction-info {
+    flex: 1;
+}
+
+.transaction-type {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.transaction-reason {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.transaction-amount {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.transaction-amount.positive {
+    color: #16a34a;
+}
+
+.transaction-amount.negative {
+    color: #dc2626;
+}
+
+.transaction-date {
+    color: #6b7280;
+    font-size: 0.75rem;
+    text-align: right;
+}
+
+/* Статистика */
+.stats-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.period-selector select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background: white;
+}
+
+/* Семья */
+.family-info {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.family-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.family-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.family-code {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f3f4f6;
+    border-radius: 0.5rem;
+}
+
+.family-code code {
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    letter-spacing: 0.1em;
+}
+
+.family-members {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.member-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.member-item:last-child {
+    border-bottom: none;
+}
+
+.member-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.member-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #4f46e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.member-name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.member-role {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-transform: capitalize;
+}
+
+/* Улучшенные стили для семьи */
+.family-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.family-card .card-header {
+    margin-bottom: 1.5rem;
+}
+
+.family-card .card-header h3 {
+    margin-bottom: 0.5rem;
+}
+
+.family-id {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.family-id label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.code-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.family-code label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.family-members-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+/* Карточки членов семьи */
+.member-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.member-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-color: #d1d5db;
+}
+
+.member-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.member-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+    position: relative;
+}
+
+.member-avatar.parent {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.member-avatar.child {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.member-avatar i {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    font-size: 0.75rem;
+    background: white;
+    color: #374151;
+    padding: 0.125rem;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-main-info {
+    flex: 1;
+}
+
+.member-main-info .member-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.member-main-info .member-role {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.member-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+@media (min-width: 640px) {
+    .member-details {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-item label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.detail-item code {
+    background: #f3f4f6;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', monospace;
+    color: #374151;
+    word-break: break-all;
+}
+
+.detail-item span {
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+/* Индикаторы авторизации */
+.auth-status {
+    margin-top: 0.5rem;
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-indicator.unauthorized {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-indicator.authorized {
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.navbar .auth-status {
+    margin-top: 0.25rem;
+}
+
+.navbar .status-indicator {
+    font-size: 0.625rem;
+    padding: 0.125rem 0.5rem;
+}
+
+/* Обновленные стили для информации о пользователе */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.125rem;
+}
+
+.user-info .user-name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.user-info .user-role {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: capitalize;
+}
+
+.user-info .user-username {
+    font-size: 0.625rem;
+    color: #9ca3af;
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', monospace;
+}
+
+/* Обновленные стили для форм авторизации */
+.auth-form input[type="password"] {
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', monospace;
+}
+
+/* Стили для отдельных страниц */
+.auth-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.auth-body .auth-container {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+.dashboard-body {
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.content {
+    flex: 1;
+    padding: 2rem;
+    margin-left: 250px;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 73px;
+    width: 250px;
+    height: calc(100vh - 73px);
+    background: white;
+    border-right: 1px solid #e5e7eb;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    .auth-body {
+        padding: 1rem;
+    }
+    
+    .auth-body .auth-container {
+        padding: 1.5rem;
+    }
+}
+
+/* Модальные окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: none;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Чекбоксы */
+.checkbox-group {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-item:hover {
+    background: #f9fafb;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.checkbox-item.checked {
+    background: #ede9fe;
+    border-color: #4f46e5;
+}
+
+/* Toast уведомления */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toast {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid;
+    max-width: 320px;
+    animation: slideIn 0.3s ease;
+}
+
+.toast.success {
+    border-left-color: #16a34a;
+}
+
+.toast.error {
+    border-left-color: #dc2626;
+}
+
+.toast.info {
+    border-left-color: #2563eb;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Статистика заданий для родителей */
+.task-stats-section {
+    margin: 2rem 0;
+}
+
+.task-stats-section h3 {
+    margin-bottom: 1rem;
+    color: #374151;
+    font-weight: 600;
+}
+
+.task-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.task-stat-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #6b7280;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-stat-card.in-progress {
+    border-left-color: #3b82f6;
+}
+
+.task-stat-card.pending {
+    border-left-color: #f59e0b;
+}
+
+.task-stat-card.completed {
+    border-left-color: #10b981;
+}
+
+.task-stat-card .stat-icon {
+    color: #6b7280;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.task-stat-card.in-progress .stat-icon {
+    color: #3b82f6;
+}
+
+.task-stat-card.pending .stat-icon {
+    color: #f59e0b;
+}
+
+.task-stat-card.completed .stat-icon {
+    color: #10b981;
+}
+
+/* Статистика детей */
+.children-stats-section {
+    margin: 2rem 0;
+}
+
+.children-stats-section h3 {
+    margin-bottom: 1rem;
+    color: #374151;
+    font-weight: 600;
+}
+
+.children-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.child-stat-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #8b5cf6;
+}
+
+.child-stat-card .child-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.child-stat-card .child-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin-right: 0.75rem;
+}
+
+.child-stat-card .child-name {
+    font-weight: 600;
+    color: #374151;
+}
+
+.child-task-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.child-task-stat {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: #f9fafb;
+}
+
+.child-task-stat .stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #374151;
+    display: block;
+}
+
+.child-task-stat .stat-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+/* Фильтры заданий */
+.task-filters {
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.filter-group select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background: white;
+    font-size: 0.875rem;
+}
+
+/* История заданий */
+.history-card {
+    background: #fafafa;
+    border-left: 3px solid #e5e7eb;
+}
+
+.history-card .task-timeline {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.timeline-label {
+    font-weight: 500;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.timeline-date {
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.no-tasks {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.no-data {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 1rem;
+}
+
+/* Детальный профиль ребенка */
+.large-modal {
+    max-width: 900px;
+    width: 90vw;
+}
+
+.large-modal .modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.child-profile-overview {
+    margin-bottom: 2rem;
+}
+
+.profile-card {
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.profile-avatar i {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.25rem;
+    border-radius: 50%;
+}
+
+.profile-info h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.profile-info p {
+    margin: 0 0 1rem 0;
+    opacity: 0.8;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.profile-stat {
+    text-align: center;
+}
+
+.profile-stat .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.profile-stat .stat-label {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+/* Вкладки профиля */
+.profile-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.profile-tab-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.profile-tab-btn.active {
+    color: #4f46e5;
+    border-bottom-color: #4f46e5;
+}
+
+.profile-tab-btn:hover {
+    color: #4f46e5;
+}
+
+.profile-tab-content {
+    display: none;
+}
+
+.profile-tab-content.active {
+    display: block;
+}
+
+/* Фильтры в профиле */
+.task-filters-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+}
+
+/* Статистика заданий ребенка */
+.child-task-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.child-task-stat-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.child-task-stat-card.assigned {
+    border-left-color: #3b82f6;
+}
+
+.child-task-stat-card.completed {
+    border-left-color: #f59e0b;
+}
+
+.child-task-stat-card.approved {
+    border-left-color: #10b981;
+}
+
+.child-task-stat-card.rejected {
+    border-left-color: #ef4444;
+}
+
+.child-task-stat-card .stat-icon {
+    font-size: 1.5rem;
+    color: #6b7280;
+}
+
+.child-task-stat-card.assigned .stat-icon {
+    color: #3b82f6;
+}
+
+.child-task-stat-card.completed .stat-icon {
+    color: #f59e0b;
+}
+
+.child-task-stat-card.approved .stat-icon {
+    color: #10b981;
+}
+
+.child-task-stat-card.rejected .stat-icon {
+    color: #ef4444;
+}
+
+.child-task-stat-card .stat-info {
+    text-align: center;
+}
+
+.child-task-stat-card .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.child-task-stat-card .stat-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* Список заданий ребенка */
+.child-tasks-list {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Статистика монет */
+.coins-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.coins-stat-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.coins-stat-card h4 {
+    margin: 0 0 1rem 0;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.coins-amount {
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.coins-amount.earned {
+    color: #10b981;
+}
+
+.coins-amount.spent {
+    color: #ef4444;
+}
+
+.coins-amount.balance {
+    color: #4f46e5;
+}
+
+.coins-amount::before {
+    content: '\f51e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+/* Цели */
+.goals-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.goal-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #8b5cf6;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.goal-title {
+    font-weight: 600;
+    color: #374151;
+}
+
+.goal-type {
+    font-size: 0.875rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+.goal-progress {
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    background: #e5e7eb;
+    border-radius: 9999px;
+    height: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* Кликабельные карточки членов семьи */
+.member-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.member-card.child:hover {
+    border-left-color: #8b5cf6;
+}
+
+.clickable-hint {
+    display: block;
+    font-size: 0.75rem;
+    color: #8b5cf6;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+/* Скрытие элементов для ролей */
+.parent-only.hidden,
+.child-only.hidden {
+    display: none !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #main-screen {
+        grid-template-areas: 
+            "nav"
+            "content";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    
+    .sidebar {
+        display: none;
+    }
+    
+    .content {
+        padding: 1rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .store-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-user {
+        gap: 0.5rem;
+    }
+    
+    .user-name,
+    .user-role {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .modal {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+}
+
+/* Стили для целей */
+.goals-container {
+    padding: 1rem 0;
+}
+
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.goal-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.goal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -2px rgba(0, 0, 0, 0.15);
+    border-color: #e5e7eb;
+}
+
+.goal-card.active {
+    border-color: #22c55e;
+}
+
+.goal-card.completed {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.goal-card.paused {
+    border-color: #f59e0b;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.goal-card.cancelled {
+    border-color: #ef4444;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    opacity: 0.7;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.goal-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.goal-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.goal-status.active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.goal-status.completed {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.goal-status.paused {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.goal-status.cancelled {
+    background: #fecaca;
+    color: #dc2626;
+}
+
+.goal-type {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.goal-type i {
+    width: 1rem;
+    text-align: center;
+}
+
+.goal-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.goal-progress {
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 0.5rem;
+    background: #f3f4f6;
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar.large {
+    height: 0.75rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+    border-radius: 9999px;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: right;
+}
+
+.goal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.goal-deadline,
+.goal-reward,
+.goal-created {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.goal-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.goals-tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 2rem;
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 0.25rem;
+}
+
+.goals-tabs .tab-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.goals-tabs .tab-btn.active {
+    background: white;
+    color: #111827;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.child-goals-section {
+    margin-bottom: 2rem;
+}
+
+.child-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.child-section-title i {
+    color: #4f46e5;
+}
+
+.no-goals {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+}
+
+.no-goals-icon {
+    font-size: 4rem;
+    color: #d1d5db;
+    margin-bottom: 1rem;
+}
+
+.no-goals h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.no-goals p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Условия цели */
+.goal-conditions {
+    margin-top: 1rem;
+}
+
+.condition-group {
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.condition-group h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.75rem;
+}
+
+.goal-conditions-details {
+    margin-top: 1.5rem;
+}
+
+.goal-conditions-details h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.condition-item {
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.condition-description {
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.condition-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.condition-progress span {
+    font-size: 0.875rem;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.condition-progress-bar {
+    flex: 1;
+    height: 0.5rem;
+    background: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.condition-progress-bar .progress-fill {
+    height: 100%;
+    background: #22c55e;
+    border-radius: 9999px;
+    transition: width 0.5s ease;
+}
+
+/* Детали цели в модальном окне */
+.goal-details {
+    max-width: none;
+}
+
+.goal-overview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.goal-overview h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+    flex: 1;
+}
+
+.goal-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-item label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+}
+
+.info-item span {
+    font-size: 0.875rem;
+    color: #111827;
+}
+
+.goal-progress-detailed {
+    margin-bottom: 1.5rem;
+}
+
+.goal-progress-detailed h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.75rem;
+}
+
+/* Профиль ребенка - цели */
+.child-goal-card {
+    cursor: default;
+}
+
+.child-goal-card:hover {
+    transform: none;
+}
+
+/* Адаптивность для целей */
+@media (max-width: 768px) {
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .goal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .goal-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .goal-actions {
+        flex-wrap: wrap;
+    }
+}
+
+/* Стили для пошаговой формы создания цели */
+.large-modal {
+    max-width: 800px !important;
+    width: 90% !important;
+}
+
+.step-indicator {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    background: #4f46e5;
+    color: white;
+}
+
+.step.completed {
+    background: #10b981;
+    color: white;
+}
+
+.progress-container {
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4f46e5;
+    transition: width 0.3s ease;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.progress-labels span {
+    transition: color 0.3s ease;
+}
+
+.progress-labels span.active {
+    color: #4f46e5;
+    font-weight: 500;
+}
+
+.goal-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.goal-step.active {
+    display: block;
+}
+
+.goal-step h4 {
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Сетка для исполнителей */
+.executor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.executor-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.executor-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.executor-card.selected {
+    border-color: #4f46e5;
+    background: #f8faff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.executor-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.executor-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #4f46e5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.executor-avatar.child {
+    background: #10b981;
+}
+
+.executor-avatar.parent {
+    background: #f59e0b;
+}
+
+.executor-avatar.group {
+    background: #8b5cf6;
+}
+
+.executor-info h5 {
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.executor-info p {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.executor-members {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.executor-members h6 {
+    color: #374151;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.executor-member-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.executor-member {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: #f3f4f6;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    color: #374151;
+}
+
+/* Сетка для типов целей */
+.goal-type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.goal-type-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.goal-type-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.goal-type-card.selected {
+    border-color: #4f46e5;
+    background: #f8faff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.goal-type-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: #f3f4f6;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.goal-type-card.selected .goal-type-icon {
+    background: #4f46e5;
+    color: white;
+}
+
+.goal-type-card h5 {
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.goal-type-card p {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Параметры цели */
+.goal-basic-params {
+    margin-bottom: 2rem;
+}
+
+.goal-type-params {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.goal-type-params h5 {
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.goal-type-params h6 {
+    color: #374151;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem;
+    font-size: 0.875rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.period-inputs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.period-inputs input {
+    flex: 1;
+}
+
+.period-inputs select {
+    flex: 1;
+}
+
+/* Выбор товаров в форме */
+.store-items-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+.store-item-option {
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.store-item-option:hover {
+    border-color: #d1d5db;
+}
+
+.store-item-option.selected {
+    border-color: #4f46e5;
+    background: #f8faff;
+}
+
+.store-item-option .item-name {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+    font-size: 0.875rem;
+}
+
+.store-item-option .item-cost {
+    color: #f59e0b;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.habit-config,
+.reward-config {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.reward-config {
+    margin-top: 1rem;
+}
+
+/* Адаптивность для пошаговой формы */
+@media (max-width: 768px) {
+    .large-modal {
+        width: 98% !important;
+        max-width: none !important;
+    }
+
+    .executor-grid,
+    .goal-type-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .store-items-selection {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}

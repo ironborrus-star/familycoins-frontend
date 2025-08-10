@@ -1,0 +1,21 @@
+FROM nginx:alpine
+
+# Копирование статических файлов
+COPY . /usr/share/nginx/html
+
+# Удаление ненужных файлов
+RUN rm -f /usr/share/nginx/html/start_server.py \
+    /usr/share/nginx/html/README.md \
+    /usr/share/nginx/html/*.md \
+    /usr/share/nginx/html/Dockerfile.nginx
+
+# Создание директории для логов
+RUN mkdir -p /var/log/nginx
+
+# Настройка прав доступа
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
+    chmod -R 755 /usr/share/nginx/html
+
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в FamilyCoins</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="logo">
+            <i class="fas fa-coins"></i>
+            <h1>FamilyCoins</h1>
+            <p>Семейное мотивационное приложение</p>
+            <div class="auth-status">
+                <span class="status-indicator unauthorized">
+                    <i class="fas fa-lock"></i>
+                    Неавторизованная зона
+                </span>
+            </div>
+        </div>
+        
+        <div class="auth-tabs">
+            <button class="tab-btn active" data-tab="login">Вход</button>
+            <button class="tab-btn" data-tab="create">Создать семью</button>
+            <button class="tab-btn" data-tab="join">Присоединиться</button>
+        </div>
+        
+        <!-- Вход в систему -->
+        <div id="login-form" class="auth-form active">
+            <h2>Вход в систему</h2>
+            <form id="login-user-form">
+                <div class="form-group">
+                    <label for="login-username">Логин</label>
+                    <input type="text" id="login-username" name="username" required minlength="3" maxlength="50" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" name="password" required minlength="6" autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Войти
+                </button>
+            </form>
+        </div>
+        
+        <!-- Создание семьи -->
+        <div id="create-family" class="auth-form">
+            <h2>Создать новую семью</h2>
+            <form id="create-family-form">
+                <div class="form-group">
+                    <label for="family-name">Название семьи</label>
+                    <input type="text" id="family-name" name="name" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="parent-name">Имя родителя</label>
+                    <input type="text" id="parent-name" name="parent_name" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="parent-username">Логин родителя</label>
+                    <input type="text" id="parent-username" name="parent_username" required minlength="3" maxlength="50" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="parent-password">Пароль родителя</label>
+                    <input type="password" id="parent-password" name="parent_password" required minlength="6" maxlength="100" autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Создать семью
+                </button>
+            </form>
+        </div>
+        
+        <!-- Присоединение к семье -->
+        <div id="join-family" class="auth-form">
+            <h2>Присоединиться к семье</h2>
+            <form id="join-family-form">
+                <div class="form-group">
+                    <label for="join-name">Ваше имя</label>
+                    <input type="text" id="join-name" name="name" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="join-username">Логин</label>
+                    <input type="text" id="join-username" name="username" required minlength="3" maxlength="50" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="join-password">Пароль</label>
+                    <input type="password" id="join-password" name="password" required minlength="6" maxlength="100" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="passcode">Код семьи</label>
+                    <input type="text" id="passcode" name="passcode" required minlength="6" maxlength="6" placeholder="123456">
+                </div>
+                <div class="form-group">
+                    <label for="role">Роль</label>
+                    <select id="role" name="role" required>
+                        <option value="child">Ребенок</option>
+                        <option value="parent">Родитель</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Присоединиться
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast контейнер -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Подключаем JavaScript -->
+    <script src="app.js"></script>
+    <script>
+        // Инициализация страницы авторизации
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем сохраненную авторизацию
+            if (Auth.loadFromStorage()) {
+                // Если пользователь уже авторизован, перенаправляем на dashboard
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            // Обработчики форм авторизации
+            document.getElementById('login-user-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                Auth.login(Object.fromEntries(formData));
+            });
+
+            document.getElementById('create-family-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                Auth.createFamily(Object.fromEntries(formData));
+            });
+
+            document.getElementById('join-family-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                Auth.joinFamily(Object.fromEntries(formData));
+            });
+
+            // Переключение вкладок авторизации
+            document.querySelectorAll('.auth-tabs .tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tab = this.dataset.tab;
+                    
+                    // Переключаем активную вкладку
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Переключаем формы
+                    document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+                    if (tab === 'login') {
+                        document.getElementById('login-form').classList.add('active');
+                    } else {
+                        document.getElementById(`${tab}-family`).classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

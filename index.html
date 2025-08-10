@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyCoins - Семейное мотивационное приложение</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Конфигурация приложения -->
+    <script src="config.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Экран авторизации -->
+        <div id="auth-screen" class="screen active">
+            <div class="auth-container">
+                <div class="logo">
+                    <i class="fas fa-coins"></i>
+                    <h1>FamilyCoins</h1>
+                    <p>Семейное мотивационное приложение</p>
+                    <div class="auth-status">
+                        <span class="status-indicator unauthorized">
+                            <i class="fas fa-lock"></i>
+                            Неавторизованная зона
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Вход</button>
+                    <button class="tab-btn" data-tab="create">Создать семью</button>
+                    <button class="tab-btn" data-tab="join">Присоединиться</button>
+                </div>
+                
+                <!-- Вход в систему -->
+                <div id="login-form" class="auth-form active">
+                    <h2>Вход в систему</h2>
+                    <form id="login-user-form">
+                        <div class="form-group">
+                            <label for="login-username">Логин</label>
+                            <input type="text" id="login-username" name="username" required minlength="3" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Пароль</label>
+                            <input type="password" id="login-password" name="password" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Войти
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Создание семьи -->
+                <div id="create-family" class="auth-form">
+                    <h2>Создать новую семью</h2>
+                    <form id="create-family-form">
+                        <div class="form-group">
+                            <label for="family-name">Название семьи</label>
+                            <input type="text" id="family-name" name="name" required maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-name">Имя родителя</label>
+                            <input type="text" id="parent-name" name="parent_name" required maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-username">Логин родителя</label>
+                            <input type="text" id="parent-username" name="parent_username" required minlength="3" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-password">Пароль родителя</label>
+                            <input type="password" id="parent-password" name="parent_password" required minlength="6" maxlength="100">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Создать семью
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Присоединение к семье -->
+                <div id="join-family" class="auth-form">
+                    <h2>Присоединиться к семье</h2>
+                    <form id="join-family-form">
+                        <div class="form-group">
+                            <label for="join-name">Ваше имя</label>
+                            <input type="text" id="join-name" name="name" required maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="join-username">Логин</label>
+                            <input type="text" id="join-username" name="username" required minlength="3" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="join-password">Пароль</label>
+                            <input type="password" id="join-password" name="password" required minlength="6" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="passcode">Код семьи</label>
+                            <input type="text" id="passcode" name="passcode" required minlength="6" maxlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Роль</label>
+                            <select id="role" name="role" required>
+                                <option value="child">Ребенок</option>
+                                <option value="parent">Родитель</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            Присоединиться
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Главный экран -->
+        <div id="main-screen" class="screen">
+            <!-- Навигация -->
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <i class="fas fa-coins"></i>
+                    FamilyCoins
+                    <div class="auth-status">
+                        <span class="status-indicator authorized">
+                            <i class="fas fa-shield-alt"></i>
+                            Авторизованная зона
+                        </span>
+                    </div>
+                </div>
+                <div class="nav-user">
+                    <div class="user-info">
+                        <span class="user-name"></span>
+                        <span class="user-role"></span>
+                        <span class="user-username"></span>
+                    </div>
+                    <div class="coin-balance">
+                        <i class="fas fa-coins"></i>
+                        <span id="coin-count">0</span>
+                    </div>
+                    <button class="btn btn-outline" onclick="logout()" title="Выйти из системы">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </nav>
+            
+            <!-- Боковое меню -->
+            <aside class="sidebar">
+                <div class="sidebar-menu">
+                    <button class="menu-item active" data-section="dashboard">
+                        <i class="fas fa-home"></i>
+                        Главная
+                    </button>
+                    <button class="menu-item" data-section="tasks">
+                        <i class="fas fa-tasks"></i>
+                        Задания
+                    </button>
+                    <button class="menu-item" data-section="store">
+                        <i class="fas fa-store"></i>
+                        Магазин
+                    </button>
+                    <button class="menu-item" data-section="coins">
+                        <i class="fas fa-coins"></i>
+                        Монеты
+                    </button>
+                    <button class="menu-item" data-section="goals">
+                        <i class="fas fa-bullseye"></i>
+                        Цели
+                    </button>
+                    <button class="menu-item parent-only" data-section="stats">
+                        <i class="fas fa-chart-bar"></i>
+                        Статистика
+                    </button>
+                    <button class="menu-item" data-section="family">
+                        <i class="fas fa-users"></i>
+                        Семья
+                    </button>
+                </div>
+            </aside>
+            
+            <!-- Основное содержимое -->
+            <main class="content">
+                <!-- Дашборд -->
+                <section id="dashboard-section" class="content-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-home"></i> Главная</h2>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Мои монеты</h3>
+                                <div class="card-value" id="dashboard-coins">0</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Активные задания</h3>
+                                <div class="card-value" id="dashboard-tasks">0</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Выполнено за месяц</h3>
+                                <div class="card-value" id="dashboard-completed">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Задания -->
+                <section id="tasks-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tasks"></i> Задания</h2>
+                        <button class="btn btn-primary parent-only" onclick="showCreateTaskModal()">
+                            <i class="fas fa-plus"></i>
+                            Создать задание
+                        </button>
+                    </div>
+                    
+                    <!-- Для детей -->
+                    <div class="child-tasks">
+                        <div class="tasks-container" id="child-tasks">
+                            <!-- Задания ребенка будут загружены здесь -->
+                        </div>
+                    </div>
+                    
+                    <!-- Для родителей -->
+                    <div class="parent-tasks parent-only">
+                        <div class="tasks-tabs">
+                            <button class="tab-btn active" data-tab="created">Созданные задания</button>
+                            <button class="tab-btn" data-tab="pending">Ожидают проверки</button>
+                        </div>
+                        <div class="tasks-container" id="parent-tasks">
+                            <!-- Задания родителя будут загружены здесь -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Магазин -->
+                <section id="store-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-store"></i> Магазин</h2>
+                        <button class="btn btn-primary parent-only" onclick="showCreateItemModal()">
+                            <i class="fas fa-plus"></i>
+                            Добавить товар
+                        </button>
+                    </div>
+                    <div class="store-grid" id="store-items">
+                        <!-- Товары магазина будут загружены здесь -->
+                    </div>
+                </section>
+                
+                <!-- Монеты -->
+                <section id="coins-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-coins"></i> Монеты</h2>
+                        <button class="btn btn-primary parent-only" onclick="showAdjustCoinsModal()">
+                            <i class="fas fa-edit"></i>
+                            Корректировка
+                        </button>
+                    </div>
+                    
+                    <div class="coins-info">
+                        <div class="balance-card">
+                            <h3>Баланс монет</h3>
+                            <div class="balance-details">
+                                <div class="balance-item">
+                                    <span>Текущий баланс:</span>
+                                    <span id="current-balance">0</span>
+                                </div>
+                                <div class="balance-item">
+                                    <span>Всего заработано:</span>
+                                    <span id="total-earned">0</span>
+                                </div>
+                                <div class="balance-item">
+                                    <span>Всего потрачено:</span>
+                                    <span id="total-spent">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="transactions-container">
+                        <h3>История транзакций</h3>
+                        <div class="transaction-filters">
+                            <select id="transaction-type-filter">
+                                <option value="">Все типы</option>
+                                <option value="earned">Заработано</option>
+                                <option value="spent">Потрачено</option>
+                                <option value="bonus">Бонус</option>
+                                <option value="penalty">Штраф</option>
+                            </select>
+                        </div>
+                        <div class="transactions-list" id="transactions-list">
+                            <!-- Транзакции будут загружены здесь -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Статистика -->
+                <section id="stats-section" class="content-section parent-only">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-bar"></i> Статистика</h2>
+                        <div class="period-selector">
+                            <select id="stats-period">
+                                <option value="week">За неделю</option>
+                                <option value="month" selected>За месяц</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="stats-container" id="stats-container">
+                        <!-- Статистика будет загружена здесь -->
+                    </div>
+                </section>
+                
+                <!-- Цели -->
+                <section id="goals-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-bullseye"></i> Мои цели</h2>
+                        <button class="btn btn-primary" onclick="showCreateGoalModal()">
+                            <i class="fas fa-plus"></i>
+                            Создать цель
+                        </button>
+                    </div>
+                    
+                    <!-- Для детей -->
+                    <div class="child-goals">
+                        <div class="goals-container" id="child-goals">
+                            <!-- Цели ребенка будут загружены здесь -->
+                        </div>
+                    </div>
+                    
+                    <!-- Для родителей -->
+                    <div class="parent-goals parent-only">
+                        <div class="goals-tabs">
+                            <button class="tab-btn active" data-tab="family-goals">Цели семьи</button>
+                            <button class="tab-btn" data-tab="create-for-child">Создать для ребенка</button>
+                        </div>
+                        <div class="goals-container" id="parent-goals">
+                            <!-- Цели семьи будут загружены здесь -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Семья -->
+                <section id="family-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Информация о семье</h2>
+                    </div>
+                    <div class="family-info">
+                        <div class="family-card">
+                            <div class="card-header">
+                                <h3 id="family-name-display">Название семьи</h3>
+                                <div class="family-id">
+                                    <label>ID семьи:</label>
+                                    <div class="code-container">
+                                        <code id="family-id">--------</code>
+                                        <button class="btn btn-sm" onclick="copyFamilyId()" title="Копировать ID семьи">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="family-code">
+                                <label><i class="fas fa-key"></i> Код для присоединения:</label>
+                                <div class="code-container">
+                                    <code id="family-passcode">------</code>
+                                    <button class="btn btn-sm" onclick="copyPasscode()" title="Копировать код">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="family-members-section">
+                            <h3><i class="fas fa-users"></i> Члены семьи</h3>
+                            <div id="family-members" class="family-members">
+                                <!-- Члены семьи будут загружены здесь -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Модальные окна -->
+    <div id="modal-overlay" class="modal-overlay">
+        <!-- Создание задания -->
+        <div id="create-task-modal" class="modal">
+            <div class="modal-header">
+                <h3>Создать задание</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-task-form">
+                    <div class="form-group">
+                        <label for="task-template">Шаблон задания</label>
+                        <select id="task-template" name="template_id">
+                            <!-- Шаблоны будут загружены здесь -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-children">Назначить детям</label>
+                        <div id="task-children" class="checkbox-group">
+                            <!-- Дети будут загружены здесь -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-due-date">Срок выполнения</label>
+                        <input type="date" id="task-due-date" name="due_date">
+                    </div>
+                    <div class="form-group">
+                        <label for="task-coins">Награда (монеты)</label>
+                        <input type="number" id="task-coins" name="coins" min="1" value="10">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="createTask()">Создать</button>
+            </div>
+        </div>
+        
+        <!-- Создание товара -->
+        <div id="create-item-modal" class="modal">
+            <div class="modal-header">
+                <h3>Добавить товар</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-item-form">
+                    <div class="form-group">
+                        <label for="item-name">Название товара</label>
+                        <input type="text" id="item-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-description">Описание</label>
+                        <textarea id="item-description" name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-price">Цена (монеты)</label>
+                        <input type="number" id="item-price" name="price" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-category">Категория</label>
+                        <select id="item-category" name="category">
+                            <option value="reward">Награда</option>
+                            <option value="privilege">Привилегия</option>
+                            <option value="experience">Опыт</option>
+                            <option value="item">Предмет</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="createStoreItem()">Добавить</button>
+            </div>
+        </div>
+        
+        <!-- Корректировка монет -->
+        <div id="adjust-coins-modal" class="modal">
+            <div class="modal-header">
+                <h3>Корректировка монет</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="adjust-coins-form">
+                    <div class="form-group">
+                        <label for="adjust-child">Ребенок</label>
+                        <select id="adjust-child" name="child_id" required>
+                            <!-- Дети будут загружены здесь -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="adjust-amount">Сумма</label>
+                        <input type="number" id="adjust-amount" name="amount" required>
+                        <small>Положительное число для добавления, отрицательное для вычитания</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="adjust-reason">Причина</label>
+                        <input type="text" id="adjust-reason" name="reason" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="adjustCoins()">Применить</button>
+            </div>
+        </div>
+        
+        <!-- Создание цели -->
+        <div id="create-goal-modal" class="modal">
+            <div class="modal-header">
+                <h3>Создать цель</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-goal-form">
+                    <div class="form-group">
+                        <label for="goal-title">Название цели</label>
+                        <input type="text" id="goal-title" name="title" required maxlength="200">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-description">Описание</label>
+                        <textarea id="goal-description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-type">Тип цели</label>
+                        <select id="goal-type" name="goal_type" required onchange="Goals.onGoalTypeChange()">
+                            <option value="">Выберите тип цели</option>
+                            <option value="coin_saving">Накопить монеты</option>
+                            <option value="store_item">Накопить на товар</option>
+                            <option value="habit_building">Выработать привычку</option>
+                            <option value="mixed">Смешанная цель</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Для родителей - выбор ребенка -->
+                    <div class="form-group parent-only">
+                        <label for="goal-child">Для ребенка</label>
+                        <select id="goal-child" name="child_id">
+                            <!-- Дети будут загружены здесь -->
+                        </select>
+                    </div>
+                    
+                    <!-- Условия цели -->
+                    <div id="goal-conditions" class="goal-conditions">
+                        <!-- Условия будут добавлены динамически -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal-deadline">Срок достижения (необязательно)</label>
+                        <input type="date" id="goal-deadline" name="deadline">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-reward">Бонусные монеты за достижение</label>
+                        <input type="number" id="goal-reward" name="reward_coins" min="0" value="50">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="Goals.createGoal()">Создать цель</button>
+            </div>
+        </div>
+        
+        <!-- Детали цели -->
+        <div id="goal-details-modal" class="modal">
+            <div class="modal-header">
+                <h3>Детали цели</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="goal-details-content">
+                    <!-- Детали цели будут загружены здесь -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Закрыть</button>
+                <div id="goal-action-buttons">
+                    <!-- Кнопки действий будут добавлены динамически -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast уведомления -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
