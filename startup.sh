@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Устанавливаем переменные окружения по умолчанию
-export PORT=${PORT:-80}
+export PORT=${PORT:-8080}
 export API_BASE_URL=${API_BASE_URL:-"http://localhost:8000"}
 export APP_NAME=${APP_NAME:-"FamilyCoins"}
 export APP_VERSION=${APP_VERSION:-"1.0.0"}
